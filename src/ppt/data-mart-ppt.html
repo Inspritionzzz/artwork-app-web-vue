@@ -1,0 +1,161 @@
+<!--。-->
+
+<!--我会帮你设计一个企业级的PPT页面，采用现代简约风格，主要包含以下优化:-->
+
+<!--1. 视觉层次分明，使用蓝色为主色调-->
+<!--2. 清晰的布局结构，采用两列式设计-->
+<!--3. 适当的留白和间距-->
+<!--4. 简洁的图标和装饰元素-->
+<!--5. 专业的字体和配色方案-->
+<!--让我来编写代码:-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据集市解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0052CC',
+                        secondary: '#FF5630'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: 1024px;
+            background-color: #F4F5F7;
+        }
+        .content-card {
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-auto px-4 py-12 max-w-7xl">
+    <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">数据集市解决方案</h1>
+        <p class="text-xl text-gray-600">高效解决您的数据分析难题</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8">
+        <!-- 左侧问题描述 -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-chart-line text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">快速统计需求</h3>
+                        <p class="text-gray-600">需要统计某个数据，无法从已有系统中统计，且比较紧急</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 通过数据集市自助查询
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-table text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">周期性报表</h3>
+                        <p class="text-gray-600">需要周期性地出一张报表</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 通过数据集市 + 调度平台快速实现
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-database text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">数据维护协同</h3>
+                        <p class="text-gray-600">业务团队通过 Excel 共同维护多份数据，版本混乱</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 通过导入数据集市，协同维护
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧问题描述 -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-brain text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">大数据分析</h3>
+                        <p class="text-gray-600">一些明细数据的数据量很大，在本地进行数据分析效率低下</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 通过数据集市，借助大数据平台的计算、存储资源
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-project-diagram text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">多源数据分析</h3>
+                        <p class="text-gray-600">数据分析工作涉及多个系统数据，需要从多个系统导出数据并汇总</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 数据入仓后，整合分析
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-6 content-card">
+                <div class="flex items-start mb-4">
+                    <i class="fas fa-tools text-primary text-2xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">效率工具开发</h3>
+                        <p class="text-gray-600">想开发一个小工具，例如办公秘书、邮件提醒等</p>
+                    </div>
+                </div>
+                <div class="ml-10 text-sm text-primary">
+                    解决方案: 通过数据集市 + 数据门户相关功能快速实现
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部联系方式 -->
+    <div class="mt-16 text-center">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">需要更多帮助？</h3>
+        <p class="text-gray-600 mb-8">我们的专业团队随时为您提供支持</p>
+        <button class="bg-primary text-white px-8 py-3 rounded-button hover:bg-opacity-90 transition-all">
+            联系我们
+        </button>
+    </div>
+</div>
+</body>
+</html>

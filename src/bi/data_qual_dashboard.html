@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据质量监控看板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#64748b'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-[1024px] bg-gray-50">
+<div class="max-w-[1440px] mx-auto px-8 py-6">
+    <header class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-bold">数据质量监控看板</h1>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center bg-white rounded-button px-4 py-2 border border-gray-200">
+                <select class="outline-none bg-transparent">
+                    <option>本周</option>
+                    <option>本月</option>
+                    <option>本季度</option>
+                </select>
+            </div>
+            <button class="flex items-center gap-2 bg-primary text-white px-4 py-2 !rounded-button">
+                <i class="fas fa-sync-alt"></i>
+                <span>刷新数据</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-gray-600">检测规则总数</span>
+                <i class="fas fa-exclamation-circle text-red-500"></i>
+            </div>
+            <div class="flex items-end gap-4">
+                <span class="text-3xl font-bold">1,284</span>
+                <span class="text-red-500 text-sm">↑12.5%</span>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-gray-600">主数据相关规则</span>
+                <i class="fas fa-clock text-yellow-500"></i>
+            </div>
+            <div class="flex items-end gap-4">
+                <span class="text-3xl font-bold">128</span>
+                <span class="text-yellow-500 text-sm">↑8.2%</span>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-gray-600">数据质量登记单-处理中</span>
+                <i class="fas fa-spinner text-blue-500"></i>
+            </div>
+            <div class="flex items-end gap-4">
+                <span class="text-3xl font-bold">100</span>
+                <span class="text-blue-500 text-sm">↓5.3%</span>
+            </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-gray-600">数据质量登记单-办毕</span>
+                <i class="fas fa-check-circle text-green-500"></i>
+            </div>
+            <div class="flex items-end gap-4">
+                <span class="text-3xl font-bold">50</span>
+                <span class="text-green-500 text-sm">↑15.8%</span>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-6">质量检测规则-涉及业务系统分布</h3>
+            <div id="systemChart" class="h-[300px]"></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-6">质量检测规则-涉及部门分布</h3>
+            <div id="deptChart" class="h-[300px]"></div>
+        </div>
+    </div>
+
+<!--    <div class="grid grid-cols-2 gap-6 mb-8">-->
+<!--        <div class="bg-white p-6 rounded-lg shadow">-->
+<!--            <h3 class="text-lg font-semibold mb-6">主题数据治理-ECIF码处理进度</h3>-->
+<!--            <div id="ecifDeal" class="h-[300px]"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-semibold">数据质量规则概览</h3>
+            <button class="flex items-center gap-2 text-primary">
+                <i class="fas fa-download"></i>
+                <span>导出</span>
+            </button>
+        </div>
+        <table class="w-full">
+            <thead>
+            <tr class="border-b border-gray-200">
+                <th class="text-left py-4 px-4">规则 ID</th>
+                <th class="text-left py-4 px-4">规则名称</th>
+                <th class="text-left py-4 px-4">规则描述</th>
+                <th class="text-left py-4 px-4">规则类型</th>
+                <th class="text-left py-4 px-4">检测频率</th>
+                <th class="text-left py-4 px-4">最近执行时间</th>
+                <th class="text-left py-4 px-4">问题数据量</th>
+                <th class="text-left py-4 px-4">违规数据量</th>
+                <th class="text-left py-4 px-4">规则维护人</th>
+                <th class="text-left py-4 px-4">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="border-b border-gray-200">
+                <td class="py-4 px-4">prt_staff_001</td>
+                <td class="py-4 px-4">员工号唯一</td>
+                <td class="py-4 px-4">表中员工编号staff_id必须唯一，不为空</td>
+                <td class="py-4 px-4">完整性</td>
+                <td class="py-4 px-4">每日</td>
+                <td class="py-4 px-4">2024-01-20 10:30:00</td>
+                <td class="py-4 px-4">156</td>
+                <th class="text-left py-4 px-4">任亚金</th>
+                <td class="py-4 px-4">
+                    <button class="text-primary">查看详情</button>
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-4 px-4">cd_cdt_staff_002</td>
+                <td class="py-4 px-4">转码的代码中有未转码的情况</td>
+                <td class="py-4 px-4">查询表代码字段出现@字样的数据</td>
+                <td class="py-4 px-4">准确性</td>
+                <td class="py-4 px-4">实时</td>
+                <td class="py-4 px-4">2024-01-20 10:30:00</td>
+                <td class="py-4 px-4">89</td>
+                <th class="text-left py-4 px-4">于洋</th>
+                <td class="py-4 px-4">
+                    <button class="text-primary">查看详情</button>
+                </td>
+            </tr>
+            <tr class="border-b border-gray-200">
+                <td class="py-4 px-4">cd_cdt_staff_qty_sum_mth_002</td>
+                <td class="py-4 px-4">每月统计的在职，新增，减少人数与上月进行勾稽校验</td>
+                <td class="py-4 px-4">上月在职总人数+上月减少总人数-上月新增总人数=上上月在职总人数</td>
+                <td class="py-4 px-4">一致性</td>
+                <td class="py-4 px-4">每周</td>
+                <td class="py-4 px-4">2024-01-20 10:30:00</td>
+                <td class="py-4 px-4">245</td>
+                <th class="text-left py-4 px-4">孟祥凯</th>
+                <td class="py-4 px-4">
+                    <button class="text-primary">查看详情</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-semibold">问题处理进度</h3>
+            <div class="flex gap-4">
+<!--                <button class="flex items-center gap-2 bg-primary text-white px-4 py-2 !rounded-button">-->
+<!--                    <i class="fas fa-plus"></i>-->
+<!--                    <span>新建问题</span>-->
+<!--                </button>-->
+                <button class="flex items-center gap-2 border border-gray-200 px-4 py-2 !rounded-button">
+                    <i class="fas fa-filter"></i>
+                    <span>筛选</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-5 gap-4">
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">起草中</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">128</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-30</span>
+                            <span class="text-red-500 text-sm">2025-06-13</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">客户手机号格式异常</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">CRM 系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-29</span>
+                            <span class="text-yellow-500 text-sm">2025-06-12</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">订单金额计算错误</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">统一账户系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">确认中</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">85</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-27</span>
+                            <span class="text-yellow-500 text-sm">2025-06-11</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">商品分类数据不一致</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">数据仓库系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">处理中</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">156</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-26</span>
+                            <span class="text-red-500 text-sm">2025-06-10</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">库存数据同步延迟</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">衡泰交易系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">验证中</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">92</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-25</span>
+                            <span class="text-yellow-500 text-sm">2025-06-09</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">会员积分计算异常</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">统一资讯中心</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">审核中</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">92</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-24</span>
+                            <span class="text-yellow-500 text-sm">2025-06-08</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">会员积分计算异常</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">CCRM系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold">已完成</span>
+                    <span class="bg-gray-200 px-2 py-1 rounded text-sm">823</span>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">数据质量改进登记单-2025-23</span>
+                            <span class="text-green-500 text-sm">2025-06-08</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">支付状态更新延迟</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">TA系统</span>
+                            <span class="text-xs text-gray-500">当前处理人：张承宇</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ecifDeal = echarts.init(document.getElementById('ecifDeal'));
+
+    const ecifOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            right: 10,
+            top: 'center'
+        },
+        series: [{
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '14',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                { value: 335, name: 'CRM 系统' },
+                { value: 310, name: '统一账户系统' },
+                { value: 234, name: '数据仓库系统' },
+                { value: 135, name: '衡泰交易系统' },
+                { value: 148, name: '统一资讯中心系统' }
+            ]
+        }]
+    };
+
+    ecifDeal.setOption(ecifOption);
+
+    window.addEventListener('resize', function() {
+        ecifDeal.resize();
+    });
+</script>
+
+<script>
+    const systemChart = echarts.init(document.getElementById('systemChart'));
+    const deptChart = echarts.init(document.getElementById('deptChart'));
+
+
+    const systemOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            right: 10,
+            top: 'center'
+        },
+        series: [{
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '14',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                { value: 335, name: 'CRM 系统' },
+                { value: 310, name: '统一账户系统' },
+                { value: 234, name: '数据仓库系统' },
+                { value: 135, name: '衡泰交易系统' },
+                { value: 148, name: '统一资讯中心系统' }
+            ]
+        }]
+    };
+
+    const deptOption = {
+        animation: false,
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['待处理', '处理中', '已解决']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'category',
+            data: ['财富委', '法律合规部', '投行委', '信息技术部', '证券金融部']
+        },
+        series: [
+            {
+                name: '待处理',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [120, 130, 101, 100, 150]
+            },
+            {
+                name: '处理中',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [220, 182, 191, 234, 290]
+            },
+            {
+                name: '已解决',
+                type: 'bar',
+                stack: 'total',
+                label: {
+                    show: true
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: [150, 232, 201, 154, 190]
+            }
+        ]
+    };
+
+
+    systemChart.setOption(systemOption);
+    deptChart.setOption(deptOption);
+    // ecifDeal.setOption(ecifDeal);
+
+    window.addEventListener('resize', function() {
+        systemChart.resize();
+        deptChart.resize();
+        // ecifDeal.resize();
+    });
+</script>
+</body>
+</html>

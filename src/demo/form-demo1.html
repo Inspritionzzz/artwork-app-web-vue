@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加入候选表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#64748B'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        //.modal-backdrop {
+        //    background-color: rgba(0, 0, 0, 0.5);
+        //}
+        .modal-content {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<div class="modal-backdrop fixed inset-0"></div>
+<div class="modal-content bg-white w-[600px] rounded-lg overflow-hidden">
+    <!-- 标题栏 -->
+    <div class="bg-[#3B82F6] px-6 py-4 flex justify-between items-center">
+        <h2 class="text-white text-lg font-medium">加入映射表（机构）</h2>
+        <button class="text-white hover:text-gray-200">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <!-- 提示文本 -->
+    <div class="px-6 py-4 bg-gray-50 border-b">
+        <p class="text-gray-600">您正在对 总公司-统一账户系统（UCA） 的客户 北京工美集团总公司（120300000072）进行操作</p>
+    </div>
+
+    <!-- 表单内容 -->
+    <div class="p-6">
+        <form>
+
+            <div class="space-y-4">
+                <div class="text-right">
+                <button type="button" class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap hover:bg-blue-600">
+                    保存并退出
+                </button>
+                <button type="button" class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap hover:bg-blue-600">
+                    退出
+                </button>
+                </div>
+
+                <!-- 主体名称 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">主体名称</div>
+                    <div class="flex-1 flex gap-2">
+                        <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入主体名称">
+                        <button type="button" class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap hover:bg-blue-600">
+                            选择
+                        </button>
+                    </div>
+                </div>
+                <!-- 主体代码 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">主体代码</div>
+                    <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入主体代码">
+                </div>
+
+                <!-- 统一社会信用代码 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">统一社会信用代码</div>
+                    <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入统一社会信用代码">
+                </div>
+
+                <!-- 组织机构代码 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">组织机构代码</div>
+                    <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入组织机构代码">
+                </div>
+
+                <!-- LE码 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">LEI码</div>
+                    <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入LE码">
+                </div>
+
+                <!-- C码 -->
+                <div class="flex items-center">
+                    <div class="w-32 text-gray-600">CI码</div>
+                    <input type="text" class="flex-1 px-3 py-2 border rounded-button focus:ring-1 focus:ring-primary" placeholder="请输入C码">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="px-6 py-4 bg-gray-50 flex justify-end gap-4">
+        <button type="button" class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap hover:bg-blue-600">
+            保存并退出
+        </button>
+        <button type="button" class="px-4 py-2 border border-gray-300 text-gray-600 !rounded-button whitespace-nowrap hover:bg-gray-50">
+            退出
+        </button>
+    </div>
+</div>
+</body>
+</html>
