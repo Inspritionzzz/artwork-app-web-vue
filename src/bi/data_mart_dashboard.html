@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据集市看板</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">    <meta charset="UTF-8">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#6366F1'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+        body {
+            min-height: 1024px;
+            background-color: #f5f5f5;
+            color: #111827;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+        input {
+            background-color: #ffffff;
+            color: #111827;
+            border-color: #e5e7eb;
+        }
+        input::placeholder {
+            color: #6b7280;
+        }
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        th {
+            color: #374151 !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-auto px-4 py-6" style="width: 1440px;">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">数据集市看板</h1>
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+                <input type="date" class="px-3 py-2 border rounded-button text-sm" value="2024-01-01">
+                <span class="mx-2">至</span>
+                <input type="date" class="px-3 py-2 border rounded-button text-sm" value="2024-01-31">
+            </div>
+            <button class="flex items-center px-4 py-2 bg-primary text-white rounded-button whitespace-nowrap">
+                <i class="fas fa-sync-alt mr-2"></i>刷新数据
+            </button>
+            <span class="text-gray-500 text-sm">最后更新：2024-01-31 15:30</span>
+        </div>
+    </div>
+    <div class="grid grid-cols-4 gap-6 mb-6">
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">数据集市总数</p>
+                    <p class="text-3xl font-bold">11</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-database text-blue-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 2 个</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">本年新增集市数</p>
+                    <p class="text-3xl font-bold">4</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-database text-blue-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 2 个</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">用户总数</p>
+                    <p class="text-3xl font-bold">56</p>
+                </div>
+                <div class="w-12 h-12 bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-users text-green-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 12%</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">活跃用户数</p>
+                    <p class="text-3xl font-bold">26</p>
+                </div>
+                <div class="w-12 h-12 bg-green-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-users text-green-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 12%</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">数据资源总数</p>
+                    <p class="text-3xl font-bold">1008</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-table text-purple-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 256 个</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">离线开发-任务总数</p>
+                    <p class="text-3xl font-bold">993</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-tasks text-orange-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 156 个</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">数据交换-任务总数</p>
+                    <p class="text-3xl font-bold">93</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-tasks text-orange-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 156 个</span>
+            </div>
+        </div>
+        <div class="card p-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 mb-2">Smart BI-访问量</p>
+                    <p class="text-3xl font-bold">893</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-900/30 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-tasks text-orange-500 text-xl"></i>
+                </div>
+            </div>
+            <div class="mt-4 text-sm text-green-500">
+                <i class="fas fa-arrow-up"></i>
+                <span>较上月增长 156 个</span>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-6 mb-6">
+        <div class="card p-6">
+            <h3 class="text-lg font-medium mb-4">数据资源增长趋势</h3>
+            <div id="userTrendChart" style="width: 100%; height: 300px;"></div>
+        </div>
+        <div class="card p-6">
+            <h3 class="text-lg font-medium mb-4">数据集市资源分布</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div id="taskStatusChart" style="width: 100%; height: 300px;"></div>
+                <div class="overflow-auto" style="height: 300px;">
+                    <div class="space-y-4">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">万得</span>
+<!--                                <span class="text-green-500 text-sm">优</span>-->
+                            </div>
+                            <p class="text-sm text-gray-500">表数量：120 | 本年新增：12</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">东财</span>
+<!--                                <span class="text-yellow-500 text-sm">中</span>-->
+                            </div>
+                            <p class="text-sm text-gray-500">表数量：45 | 本年新增：12</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">财汇</span>
+<!--                                <span class="text-red-500 text-sm">差</span>-->
+                            </div>
+                            <p class="text-sm text-gray-500">表数量：50 | 本年新增：12</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">同花顺</span>
+<!--                                <span class="text-green-500 text-sm">优</span>-->
+                            </div>
+                            <p class="text-sm text-gray-500">表数量：50 | 本年新增：12</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-lg font-medium">数据集市列表</h3>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="搜索数据集市" class="pl-10 pr-4 py-2 border rounded-button text-sm w-64">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <button class="px-4 py-2 bg-primary text-white rounded-button whitespace-nowrap">
+                    <i class="fas fa-download mr-2"></i>导出数据
+                </button>
+            </div>
+        </div>
+        <table class="w-full">
+            <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">数据集市名称</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">数据资源数量</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">用户数</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">任务数</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">存储容量</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">运行状态</th>
+                <th class="px-4 py-3 text-left text-sm font-medium text-gray-500">操作</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <tr>
+                <td class="px-4 py-4 text-sm">数据管理部数据集市</td>
+                <td class="px-4 py-4 text-sm">1,256</td>
+                <td class="px-4 py-4 text-sm">328</td>
+                <td class="px-4 py-4 text-sm">56</td>
+                <td class="px-4 py-4 text-sm">32 TB</td>
+                <td class="px-4 py-4">
+                    <span class="px-2 py-1 text-xs font-medium text-green-500 bg-green-100 rounded-full">正常运行</span>
+                </td>
+                <td class="px-4 py-4">
+                    <button class="text-primary hover:text-primary-dark mr-3">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-4 text-sm">衍生品交易部数据集市</td>
+                <td class="px-4 py-4 text-sm">2,845</td>
+                <td class="px-4 py-4 text-sm">562</td>
+                <td class="px-4 py-4 text-sm">89</td>
+                <td class="px-4 py-4 text-sm">64 TB</td>
+                <td class="px-4 py-4">
+                    <span class="px-2 py-1 text-xs font-medium text-green-500 bg-green-100 rounded-full">正常运行</span>
+                </td>
+                <td class="px-4 py-4">
+                    <button class="text-primary hover:text-primary-dark mr-3">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-4 text-sm">托管部数据集市</td>
+                <td class="px-4 py-4 text-sm">1,523</td>
+                <td class="px-4 py-4 text-sm">245</td>
+                <td class="px-4 py-4 text-sm">42</td>
+                <td class="px-4 py-4 text-sm">28 TB</td>
+                <td class="px-4 py-4">
+                    <span class="px-2 py-1 text-xs font-medium text-yellow-500 bg-yellow-100 rounded-full">部分异常</span>
+                </td>
+                <td class="px-4 py-4">
+                    <button class="text-primary hover:text-primary-dark mr-3">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-4 text-sm">运营管理部数据集市</td>
+                <td class="px-4 py-4 text-sm">986</td>
+                <td class="px-4 py-4 text-sm">178</td>
+                <td class="px-4 py-4 text-sm">35</td>
+                <td class="px-4 py-4 text-sm">16 TB</td>
+                <td class="px-4 py-4">
+                    <span class="px-2 py-1 text-xs font-medium text-red-500 bg-red-100 rounded-full">异常</span>
+                </td>
+                <td class="px-4 py-4">
+                    <button class="text-primary hover:text-primary-dark mr-3">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="flex justify-between items-center mt-4">
+            <p class="text-sm text-gray-500">共 128 条数据</p>
+            <div class="flex items-center space-x-2">
+                <button class="px-3 py-1 border rounded-button text-sm disabled:opacity-50" disabled>上一页</button>
+                <button class="px-3 py-1 bg-primary text-white rounded-button text-sm">1</button>
+                <button class="px-3 py-1 border rounded-button text-sm">2</button>
+                <button class="px-3 py-1 border rounded-button text-sm">3</button>
+                <button class="px-3 py-1 border rounded-button text-sm">下一页</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const userTrendChart = echarts.init(document.getElementById('userTrendChart'));
+    const userTrendOption = {
+        backgroundColor: 'transparent',
+        textStyle: {
+            color: '#e5e7eb'
+        },
+        animation: false,
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['数据资源数', '活跃用户数'],
+            bottom: 0
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['1月1日', '1月2日', '1月3日', '1月4日', '1月5日', '1月6日', '1月7日']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name: '数据资源数',
+            type: 'line',
+            smooth: true,
+            data: [11200, 11532, 11801, 12054, 12290, 12430, 12568],
+            itemStyle: {
+                color: '#6366F1'
+            },
+            areaStyle: {
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0,
+                        color: 'rgba(99, 102, 241, 0.2)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(99, 102, 241, 0)'
+                    }]
+                }
+            }
+        },
+            {
+                name: '活跃用户数',
+                type: 'line',
+                smooth: true,
+                data: [2820, 2932, 3001, 3154, 3190, 3230, 3256],
+                itemStyle: {
+                    color: '#10B981'
+                },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0,
+                            color: 'rgba(16, 185, 129, 0.2)'
+                        }, {
+                            offset: 1,
+                            color: 'rgba(16, 185, 129, 0)'
+                        }]
+                    }
+                }
+            }]
+    };
+    userTrendChart.setOption(userTrendOption);
+    const taskStatusChart = echarts.init(document.getElementById('taskStatusChart'));
+    const taskStatusOption = {
+        backgroundColor: 'transparent',
+        textStyle: {
+            color: '#e5e7eb'
+        },
+        animation: false,
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            bottom: '0',
+            left: 'center'
+        },
+        series: [{
+            name: '数据资源分布',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            center: ['50%', '40%'],
+            data: [
+                { value: 5623, name: '万得数据', itemStyle: { color: '#6366F1' } },
+                { value: 3845, name: '东财数据', itemStyle: { color: '#10B981' } },
+                { value: 2100, name: '财汇数据', itemStyle: { color: '#F59E0B' } },
+                { value: 1000, name: '同花顺数据', itemStyle: { color: '#EF4444' } }
+            ],
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+    taskStatusChart.setOption(taskStatusOption);
+    window.addEventListener('resize', function() {
+        userTrendChart.resize();
+        taskStatusChart.resize();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>存续公募产品数量</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#16A34A',
+                        secondary: '#E2E8F0'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        flatpickr("#datePicker", {
+            dateFormat: "Y-m-d", // 日期格式
+            defaultDate: new Date(), // 默认选中当前日期
+            // 可根据需求添加更多配置（如范围选择、禁用日期等）
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0fdf4;
+            min-height: 1024px;
+        }
+        .font-pacifico {
+            font-family: 'Pacifico', cursive;
+        }
+        .chart-container {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .query-container {
+            margin-bottom: 16px; /* 根据需求调整像素值，如 20px、24px 等 */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center py-12 px-6 bg-gradient-to-br from-green-50 to-emerald-50 min-h-screen">
+<div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl p-8 mb-8">
+    <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">证券公司托管公募基金产品规模</h1>
+        <div class="flex space-x-4">
+            <button class="bg-primary hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-button transition duration-300 ease-in-out transform hover:-translate-y-1">
+                <i class="fas fa-download mr-2"></i>导出数据
+            </button>
+            <!--            <button class="bg-white border-2 border-primary text-primary hover:bg-green-50 font-semibold py-2 px-4 rounded-button transition duration-300 ease-in-out whitespace-nowrap">-->
+            <!--                <i class="fas fa-sync-alt mr-2"></i>刷新-->
+            <!--            </button>-->
+        </div>
+    </div>
+
+    <!--    <div class="flex flex-wrap gap-4 mb-6">-->
+    <!--        <div class="flex-1 min-w-[200px] bg-blue-50 rounded-lg p-4 border border-blue-100">-->
+    <!--            <p class="text-blue-800 text-sm font-medium">总计产品</p>-->
+    <!--            <p class="text-2xl font-bold text-blue-900">1263</p>-->
+    <!--            <p class="text-xs text-blue-600 mt-1"><i class="fas fa-arrow-up text-green-500"></i> 较上月 +5.2%</p>-->
+    <!--        </div>-->
+
+    <!--        <div class="flex-1 min-w-[200px] bg-emerald-50 rounded-lg p-4 border border-emerald-100">-->
+    <!--            <p class="text-emerald-800 text-sm font-medium">平均规模</p>-->
+    <!--            <p class="text-2xl font-bold text-emerald-900">¥8.2 亿</p>-->
+    <!--            <p class="text-xs text-emerald-600 mt-1"><i class="fas fa-arrow-down text-red-500"></i> 较上月 -1.3%</p>-->
+    <!--        </div>-->
+
+    <!--        <div class="flex-1 min-w-[200px] bg-amber-50 rounded-lg p-4 border border-amber-100">-->
+    <!--            <p class="text-amber-800 text-sm font-medium">最高产品数</p>-->
+    <!--            <p class="text-2xl font-bold text-amber-900">国泰海通</p>-->
+    <!--            <p class="text-xs text-amber-600 mt-1">248 只产品</p>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <div class="query-container">
+        <!--        <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700">查询日期</button>-->
+        <!-- 新增日历输入框 -->
+        <input type="text" id="datePicker" class="px-3 py-1 text-sm border rounded-md text-gray-700" placeholder="选择日期">
+        <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700">查询</button>
+<!--        &lt;!&ndash; 左侧单位文本 &ndash;&gt;-->
+<!--        <span class="text-sm text-gray-600">单位：亿元</span>-->
+        <!-- 右侧：单位文本（最右端） -->
+<!--        <span class="text-sm text-gray-600">单位：亿元</span>-->
+        <!--        <button class="px-3 py-1 text-sm bg-primary text-white rounded-md">近三月</button>-->
+        <!--        <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md text-gray-700">近一月</button>-->
+    </div>
+
+
+    <div id="chart" class="w-full h-96 chart-container query-container"></div>
+    <!-- 说明文字 -->
+    <div class="text-sm text-gray-600 italic">
+        注：本图表展示了托管公募基金产品规模排名前十的证券公司。
+    </div>
+    <script>
+        const chartDom = document.getElementById('chart');
+        const myChart = echarts.init(chartDom);
+        const option = {
+            animation: false,
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['国泰海通', '招商证券', '中信证券', '广发证券', '中金公司', '华泰证券', '兴业证券', '中信建投', '中国银河', '申万宏源'],
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLabel: {
+                        fontSize: 14,
+                        color: '#333'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '单位：亿元',
+                    min: 0,
+                    interval: 500,
+                    axisLabel: {
+                        fontSize: 12,
+                        color: '#666'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#eee'
+                        }
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '各券商托管公募基金产品规模',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [
+                        { value: 3000.24, itemStyle: { color: '#1E40AF' } },
+                        { value: 2480.00, itemStyle: { color: '#1E40AF' } },
+                        { value: 1800.00, itemStyle: { color: '#1E40AF' } },
+                        { value: 1600.02, itemStyle: { color: '#1E40AF' } },
+                        { value: 1400.23, itemStyle: { color: '#1E40AF' } },
+                        { value: 1300.33, itemStyle: { color: '#1E40AF' } },
+                        { value: 898.03, itemStyle: { color: '#1E40AF' } },
+                        { value: 798.03, itemStyle: { color: '#1E40AF' } },
+                        { value: 698.03, itemStyle: { color: '#1E40AF' } },
+                        { value: 598.03, itemStyle: { color: '#1E40AF' } },
+                    ],
+                    label: {
+                        show: true,
+                        position: 'top',
+                        fontSize: 14,
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

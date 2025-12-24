@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中信建投证券 - 客户ECIF管理系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* 自定义字体和图标 */
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .sidebar-menu .arrow {
+            transform: rotate(90deg);
+            transition: transform 0.3s ease;
+        }
+        .sidebar-menu.collapsed .arrow {
+            transform: rotate(-90deg);
+        }
+        .dropdown-icon {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-700">
+
+<!-- 顶部导航栏 -->
+<header class="bg-blue-900 text-white h-14 flex items-center px-4 shadow-md">
+    <div class="flex items-center space-x-2">
+        <img src="https://via.placeholder.com/40x40?text=LOGO" alt="中信建投证券" class="w-10 h-10 rounded-full bg-red-500 flex-shrink-0" />
+        <span class="font-bold text-lg">中信建投证券</span>
+        <span class="text-xs opacity-80">CHINA SECURITIES</span>
+    </div>
+    <div class="ml-auto text-sm opacity-90">
+        客户ECIF管理系统（CCRM系统）
+    </div>
+    <div class="ml-4 text-sm font-mono">CSC24904</div>
+</header>
+
+<div class="flex h-screen">
+    <!-- 左侧导航栏 -->
+    <aside class="w-64 bg-blue-800 text-white h-full p-4 flex flex-col overflow-y-auto">
+        <nav class="space-y-2">
+            <a href="#" class="flex items-center space-x-2 px-4 py-2 rounded hover:bg-blue-700 transition">
+                <i class="fas fa-home"></i>
+                <span>主页</span>
+            </a>
+
+            <div class="relative">
+                <button class="flex items-center justify-between w-full px-4 py-2 rounded hover:bg-blue-700 transition">
+            <span class="flex items-center space-x-2">
+              <i class="fas fa-calendar-check"></i>
+              <span>待办事宜</span>
+            </span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+
+            <div class="relative">
+                <button class="flex items-center justify-between w-full px-4 py-2 rounded hover:bg-blue-700 transition">
+            <span class="flex items-center space-x-2">
+              <i class="fas fa-user"></i>
+              <span>客户管理</span>
+            </span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="pl-8 mt-1 space-y-1">
+                    <a href="#" class="block px-4 py-1 text-sm hover:bg-blue-700 rounded transition">我的客户</a>
+                    <a href="#" class="block px-4 py-1 text-sm hover:bg-blue-700 rounded transition">公司所有客户</a>
+                    <a href="#" class="block px-4 py-1 text-sm hover:bg-blue-700 rounded transition">修改客户涉税信息</a>
+                    <a href="#" class="block px-4 py-1 text-sm hover:bg-blue-700 rounded transition">客户标签展示</a>
+                </div>
+            </div>
+
+            <div class="relative">
+                <button class="flex items-center justify-between w-full px-4 py-2 rounded hover:bg-blue-700 transition">
+            <span class="flex items-center space-x-2">
+              <i class="fas fa-box"></i>
+              <span>产品管理</span>
+            </span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+                <div class="pl-8 mt-1 space-y-1">
+                    <a href="#" class="block px-4 py-1 text-sm hover:bg-blue-700 rounded transition">公司所有产品</a>
+                </div>
+            </div>
+
+            <div class="relative">
+                <button class="flex items-center justify-between w-full px-4 py-2 rounded hover:bg-blue-700 transition">
+            <span class="flex items-center space-x-2">
+              <i class="fas fa-code"></i>
+              <span>ECIF码维护管理</span>
+            </span>
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 overflow-auto bg-gray-50">
+        <div class="max-w-7xl mx-auto p-4">
+            <!-- 面包屑 -->
+            <nav class="text-xs text-gray-500 mb-4">
+                <span>客户管理</span> /
+                <span>公司所有客户</span> /
+                <span>客户详情</span>
+            </nav>
+
+            <!-- 标题 -->
+            <h1 class="text-lg font-semibold text-gray-800 mb-6">
+                您正在查看管理 嘉实基金管理有限公司(G00000000001) 的信息
+            </h1>
+
+            <!-- 标签页 -->
+            <div class="border-b border-gray-300 mb-6">
+                <div class="flex space-x-1">
+                    <button class="px-4 py-2 font-medium text-blue-700 border-b-2 border-blue-700">基本信息</button>
+                    <button class="px-4 py-2 font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-700">所属服务团队</button>
+                    <button class="px-4 py-2 font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-700">财务信息</button>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="flex space-x-3 mb-6">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">更新工商数据</button>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">保存修改</button>
+                <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">还原</button>
+            </div>
+
+            <!-- 表单区域 -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- 第一列 -->
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">客户编号</label>
+                            <input type="text" value="G00000000001" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" readonly />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">* 客户名称</label>
+                            <input type="text" value="嘉实基金管理有限公司" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">其他名称</label>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">统一社会信用代码</label>
+                            <input type="text" value="91310000700218879J" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">成立时间</label>
+                            <input type="date" value="2022-04-06" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">注册地（省）</label>
+                            <select class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                                <option>上海市</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">注册地址</label>
+                            <input type="text" value="323" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">行政区域代码</label>
+                            <select class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                                <option>请选择</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">企业性质</label>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">国标行业分类</label>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+                    </div>
+
+                    <!-- 第二列 -->
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">客户简称</label>
+                            <input type="text" value="嘉实基金" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">企业状态</label>
+                            <input type="text" value="在营（开业）" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">全国组织机构代码</label>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">注册地（国家/地区）</label>
+                            <select class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                                <option>中国</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">注册地（市）</label>
+                            <select class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                                <option>上海市</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">营业执照编号</label>
+                            <input type="text" value="25323" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">* 境内境外标志</label>
+                            <select class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                                <option>境内</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">网址</label>
+                            <input type="text" value="1323" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-32 text-sm font-medium text-gray-700">主营业务（经营范围）</label>
+                            <textarea rows="3" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                                      style="resize: none;">
+基金募集；基金销售；资产管理；中国证监会许可的其他业务。【依法须经批准的项目，经相关部门批准后方可开展经营活动】
+                </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

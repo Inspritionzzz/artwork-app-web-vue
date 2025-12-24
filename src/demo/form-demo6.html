@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收款人信息</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind 配置（若有需要可添加，此处示例无额外配置） -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {},
+            }
+        }
+    </script>
+    <!-- 自定义工具类（若有需要可添加，此处示例无额外工具类） -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-200">
+<div class="w-11/12 max-w-4xl mx-auto my-10 bg-white rounded-md shadow-md p-6">
+    <h3 class="text-lg font-semibold mb-4">选择收款人主体</h3>
+    <p class="text-red-500 mb-4">请输入关键字进行查询:</p>
+    <div class="flex items-center mb-4">
+        <input type="text" placeholder="请输入关键字进行查询" class="flex-1 border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        <button class="bg-gray-200 border border-gray-300 rounded-r-md px-3 py-2 hover:bg-gray-300 transition-colors">
+            <i class="fas fa-search text-gray-600"></i>
+        </button>
+    </div>
+    <div class="border border-gray-300 rounded-md p-2 h-48 mb-6">
+        <!-- 这里是查询结果展示区域，可根据实际需求填充内容 -->
+    </div>
+    <div class="flex justify-end">
+        <button type="button" class="bg-red-600 text-white px-4 py-2 rounded-md font-medium hover:bg-red-700 transition-colors mr-2">确定</button>
+        <button type="button" class="bg-white text-gray-700 border border-gray-300 px-4 py-2 rounded-md font-medium hover:bg-gray-50 transition-colors">取消</button>
+    </div>
+</div>
+</body>
+</html>
