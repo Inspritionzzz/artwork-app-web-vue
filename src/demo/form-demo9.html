@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品查询表单</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .form-group {
+                @apply flex items-center gap-2 w-[280px] whitespace-nowrap; /* 核心：禁止换行 + 加宽容器 */
+            }
+            .form-label {
+                @apply text-sm font-medium text-gray-700 w-[100px] text-right whitespace-nowrap; /* 标签不换行 */
+            }
+            .form-control {
+                @apply border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 w-full transition-all whitespace-nowrap; /* 输入框内容不换行 */
+            }
+            .btn-primary {
+                @apply bg-blue-600 text-white rounded px-4 py-1.5 text-sm cursor-pointer hover:bg-blue-700 transition-colors flex items-center gap-1 whitespace-nowrap;
+            }
+            .btn-default {
+                @apply border border-gray-300 rounded px-4 py-1.5 text-sm cursor-pointer hover:bg-gray-100 transition-colors flex items-center gap-1 whitespace-nowrap;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-6">
+<div class="bg-white rounded-lg shadow-md p-6 max-w-7xl mx-auto overflow-x-auto"> <!-- 适配小屏幕，横向滚动 -->
+    <!-- 表单容器（网格布局，适配不换行） -->
+    <div class="grid grid-cols-4 gap-x-8 gap-y-5 min-w-[1120px]"> <!-- 最小宽度保证4列不挤压 -->
+        <!-- 第一行 -->
+        <div class="form-group">
+            <label class="form-label">P码:</label>
+            <input type="text" placeholder="请输入产品代码" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label">产品名称:</label>
+            <input type="text" placeholder="请输入中文简称" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label">产品备案机构:</label>
+            <select class="form-control">
+                <option>请选择产品备案机构</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">产品备案码:</label>
+            <input type="text" placeholder="请输入产品唯一编码" class="form-control">
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">币种代码:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择币种代码</option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <div class="form-group">
+            <label class="form-label">管理人编号:</label>
+            <input type="text" value="" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label">管理人名称:</label>
+            <input type="text" value="" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label">托管人编号:</label>
+            <input type="text" value="" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="form-label">托管人名称:</label>
+            <input type="text" value="" class="form-control">
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">投资类型代码:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择投资类型</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">募集方式代码:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择募集方式</option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+        <!-- 第三行 -->
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">产品状态代码:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择产品状态</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">存续期限:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择存续期限</option>-->
+<!--            </select>-->
+<!--        </div>-->
+        <div class="form-group">
+            <label class="form-label">产品分类:</label>
+            <select class="form-control">
+                <option>请选择产品分类</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">分级产品标志:</label>
+            <select class="form-control">
+                <option>请选择分级产品</option>
+            </select>
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label class="form-label">上市标志:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择上市标志</option>-->
+<!--            </select>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 第四行 &ndash;&gt;-->
+<!--        <div class="form-group col-span-2">-->
+<!--            <label class="form-label">退市标志:</label>-->
+<!--            <select class="form-control">-->
+<!--                <option>请选择退市标志</option>-->
+<!--            </select>-->
+<!--        </div>-->
+        <div class="col-span-2 flex items-center gap-3 whitespace-nowrap">
+            <label class="form-label">开始日期:</label>
+            <div class="flex items-center gap-2">
+                <input type="date" value="2026-01-12" class="form-control w-[160px]">
+                <span class="text-gray-500">-</span>
+                <input type="date" value="2026-01-12" class="form-control w-[160px]">
+            </div>
+        </div>
+    </div>
+
+    <!-- 按钮区域 -->
+    <div class="mt-8 flex justify-end gap-3">
+        <button class="btn-primary">
+            <i class="fa fa-search"></i>查询
+        </button>
+        <button class="btn-default">
+            <i class="fa fa-refresh"></i>重置
+        </button>
+        <button class="btn-default">
+            <i class="fa fa-download"></i>下载
+        </button>
+    </div>
+</div>
+</body>
+</html>

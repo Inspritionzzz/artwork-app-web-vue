@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户管理表单</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+<!-- 头部 -->
+<div class="bg-white border-b border-gray-200">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="font-semibold text-lg">中国建投证券股份有限公司</div>
+        <div class="flex items-center gap-4 text-sm">
+            <span>个人主页</span>
+            <i class="fa fa-question-circle-o"></i>
+            <i class="fa fa-cog"></i>
+        </div>
+    </div>
+</div>
+
+<!-- 蓝色横幅 -->
+<div class="bg-blue-800 text-white py-2 text-center">
+    让您的企业成为我们的客户 让我们的客户成为您的企业
+</div>
+
+<!-- 主体容器 -->
+<div class="container mx-auto px-4 py-4 flex gap-4">
+    <!-- 左侧导航（整体深蓝色系） -->
+    <div class="w-48 bg-blue-900 rounded-lg shadow-sm text-white">
+        <div class="p-2 bg-blue-700 border-b border-blue-600">
+            <i class="fa fa-home mr-2"></i>首页
+        </div>
+        <div class="p-2 border-b border-blue-600 hover:bg-blue-800 transition-colors">
+            <i class="fa fa-tasks mr-2"></i>待办事宜
+        </div>
+        <div class="p-2 border-b border-blue-600 hover:bg-blue-800 transition-colors">客户管理</div>
+        <div class="p-2 border-b border-blue-600 hover:bg-blue-800 transition-colors">
+            <i class="fa fa-user mr-2"></i>我的客户
+        </div>
+        <div class="p-2 bg-blue-600 border-b border-blue-500 font-medium">
+            <i class="fa fa-list mr-2"></i>所有客户
+        </div>
+        <div class="p-2 border-b border-blue-600 hover:bg-blue-800 transition-colors">
+            <i class="fa fa-pencil mr-2"></i>修改客户涉密信息
+        </div>
+        <div class="p-2 border-b border-blue-600 hover:bg-blue-800 transition-colors">
+            <i class="fa fa-tag mr-2"></i>客户标签展示
+        </div>
+        <div class="p-2 bg-blue-700 border-b border-blue-600 font-medium">
+            <i class="fa fa-tags mr-2"></i>客户标签管理
+        </div>
+    </div>
+
+    <!-- 右侧内容区 -->
+    <div class="flex-1 bg-white rounded-lg shadow-sm p-4">
+        <!-- 客户类型标签 -->
+        <div class="flex gap-2 mb-4">
+            <div class="px-4 py-2 bg-blue-800 text-white rounded-t-md flex items-center">
+                <i class="fa fa-building mr-2"></i>机构客户
+            </div>
+            <div class="px-4 py-2 bg-gray-200 text-gray-700 rounded-t-md flex items-center">
+                <i class="fa fa-cubes mr-2"></i>产品客户
+            </div>
+            <div class="px-4 py-2 bg-gray-200 text-gray-700 rounded-t-md flex items-center">
+                <i class="fa fa-user mr-2"></i>个人客户
+            </div>
+        </div>
+
+        <!-- 查询栏 -->
+        <div class="flex flex-wrap gap-3 items-center mb-4">
+            <div class="flex items-center gap-2">
+                <label>客户编码:</label>
+                <input type="text" placeholder="请输入客户编码" class="border border-gray-300 rounded px-2 py-1 text-sm w-32">
+            </div>
+            <div class="flex items-center gap-2">
+                <label>客户名称:</label>
+                <input type="text" placeholder="请输入客户名称" class="border border-gray-300 rounded px-2 py-1 text-sm w-40">
+            </div>
+            <div class="flex items-center gap-2">
+                <label>是否上市公司:</label>
+                <select class="border border-gray-300 rounded px-2 py-1 text-sm w-24">
+                    <option>请选择</option>
+                </select>
+            </div>
+            <div class="flex items-center gap-2">
+                <label>地区:</label>
+                <select class="border border-gray-300 rounded px-2 py-1 text-sm w-24">
+                    <option>请选择</option>
+                </select>
+            </div>
+            <button class="bg-blue-800 text-white px-3 py-1 rounded text-sm flex items-center hover:bg-blue-700 transition-colors">
+                <i class="fa fa-search mr-1"></i>查询
+            </button>
+            <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm flex items-center hover:bg-gray-300 transition-colors">
+                <i class="fa fa-refresh mr-1"></i>重置
+            </button>
+            <button class="bg-blue-800 text-white px-3 py-1 rounded text-sm flex items-center hover:bg-blue-700 transition-colors">
+                <i class="fa fa-plus mr-1"></i>新增客户
+            </button>
+        </div>
+
+        <!-- 客户表格 -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                <tr class="bg-gray-100">
+                    <th class="border border-gray-300 px-2 py-2 text-left">客户编码</th>
+                    <th class="border border-gray-300 px-2 py-2 text-left">客户名称</th>
+                    <th class="border border-gray-300 px-2 py-2 text-left">企业类型</th>
+                    <th class="border border-gray-300 px-2 py-2 text-left">企业状态</th>
+                    <th class="border border-gray-300 px-2 py-2 text-left">地区</th>
+                    <th class="border border-gray-300 px-2 py-2 text-left">国标行业</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="border border-gray-300 px-2 py-2">G00000121667</td>
+                    <td class="border border-gray-300 px-2 py-2">深圳市中兴合众管理有限公司雅萨尔顿酒店</td>
+                    <td class="border border-gray-300 px-2 py-2">有限责任公司分公司</td>
+                    <td class="border border-gray-300 px-2 py-2">存续(在营、开业、在册)</td>
+                    <td class="border border-gray-300 px-2 py-2">广东省</td>
+                    <td class="border border-gray-300 px-2 py-2">住宿和餐饮业-住宿业</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-2 py-2">G00000744781</td>
+                    <td class="border border-gray-300 px-2 py-2">永盈科技有限公司</td>
+                    <td class="border border-gray-300 px-2 py-2">公司型客户</td>
+                    <td class="border border-gray-300 px-2 py-2">有限责任公司</td>
+                    <td class="border border-gray-300 px-2 py-2">香港特别行政区</td>
+                    <td class="border border-gray-300 px-2 py-2">科技行业</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-2 py-2">G00000744782</td>
+                    <td class="border border-gray-300 px-2 py-2">石四药集团有限公司</td>
+                    <td class="border border-gray-300 px-2 py-2">公司型客户</td>
+                    <td class="border border-gray-300 px-2 py-2">有限责任公司</td>
+                    <td class="border border-gray-300 px-2 py-2">河北省</td>
+                    <td class="border border-gray-300 px-2 py-2">医药制造业</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-2 py-2">G00000744783</td>
+                    <td class="border border-gray-300 px-2 py-2">STRATEGIC TRIUMPH LIMITED</td>
+                    <td class="border border-gray-300 px-2 py-2">公司型客户</td>
+                    <td class="border border-gray-300 px-2 py-2">外资企业</td>
+                    <td class="border border-gray-300 px-2 py-2">香港特别行政区</td>
+                    <td class="border border-gray-300 px-2 py-2">金融服务业</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-2 py-2">G00000744786</td>
+                    <td class="border border-gray-300 px-2 py-2">天大文化（控股）有限公司</td>
+                    <td class="border border-gray-300 px-2 py-2">公司型客户</td>
+                    <td class="border border-gray-300 px-2 py-2">有限责任公司</td>
+                    <td class="border border-gray-300 px-2 py-2">香港特别行政区</td>
+                    <td class="border border-gray-300 px-2 py-2">文化产业</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-2 py-2">G00000744787</td>
+                    <td class="border border-gray-300 px-2 py-2">禀信控股（香港）有限公司</td>
+                    <td class="border border-gray-300 px-2 py-2">公司型客户</td>
+                    <td class="border border-gray-300 px-2 py-2">外资企业</td>
+                    <td class="border border-gray-300 px-2 py-2">香港特别行政区</td>
+                    <td class="border border-gray-300 px-2 py-2">投资银行业</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        <div class="flex justify-between items-center mt-4">
+            <div class="text-sm">共6条记录</div>
+            <div class="flex items-center gap-1">
+                <button class="border border-gray-300 rounded px-2 py-1 text-sm hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+                <button class="bg-blue-800 text-white border border-blue-800 rounded px-2 py-1 text-sm">1</button>
+                <button class="border border-gray-300 rounded px-2 py-1 text-sm hover:bg-gray-100 transition-colors">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

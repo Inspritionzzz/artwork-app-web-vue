@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客户ECIF管理系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF', // 中信建投主色调
+                        secondary: '#3B82F6',
+                        sidebar: '#1E3A8A',
+                        sidebarHover: '#3B82F6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .sidebar-item {
+                @apply flex items-center gap-2 px-4 py-2 text-white hover:bg-sidebarHover transition-colors duration-200 cursor-pointer;
+            }
+            .sidebar-item.active {
+                @apply bg-sidebarHover;
+            }
+            .form-input {
+                @apply border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-secondary;
+            }
+            .form-select {
+                @apply border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-secondary;
+            }
+            .btn-primary {
+                @apply bg-secondary text-white rounded px-3 py-1 text-sm cursor-pointer hover:bg-blue-700 transition-colors;
+            }
+            .btn-default {
+                @apply border border-gray-300 rounded px-3 py-1 text-sm cursor-pointer hover:bg-gray-100 transition-colors;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+<!-- 顶部导航 -->
+<header class="bg-primary text-white h-12 flex items-center justify-between px-4">
+    <div class="flex items-center gap-3">
+        <div class="font-bold text-lg">中信建投证券</div>
+        <div class="text-sm">客户ECIF管理系统(CCRM系统)</div>
+    </div>
+    <div class="flex items-center gap-2 text-sm">
+        <i class="fa fa-user"></i>
+        <span>张琼宇</span>
+        <i class="fa fa-caret-down"></i>
+    </div>
+</header>
+
+<div class="flex flex-1 h-[calc(100vh-3rem)]">
+    <!-- 侧边栏 -->
+    <aside class="w-64 bg-sidebar text-white flex flex-col">
+        <div class="sidebar-item">
+            <i class="fa fa-home"></i>
+            <span>主页</span>
+        </div>
+        <div class="mt-2">
+            <div class="sidebar-item">
+                <i class="fa fa-users"></i>
+                <span>客户管理</span>
+                <i class="fa fa-caret-down ml-auto"></i>
+            </div>
+            <div class="pl-4">
+                <div class="sidebar-item text-sm">我的客户</div>
+                <div class="sidebar-item active text-sm">公司所有客户</div>
+                <div class="sidebar-item text-sm">修改客户涉诉信息</div>
+                <div class="sidebar-item text-sm">客户标签管理</div>
+                <div class="sidebar-item text-sm">客户标签展示</div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="sidebar-item">
+                <i class="fa fa-cubes"></i>
+                <span>产品管理</span>
+                <i class="fa fa-caret-down ml-auto"></i>
+            </div>
+            <div class="pl-4">
+                <div class="sidebar-item text-sm">公司所有产品</div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="sidebar-item">
+                <i class="fa fa-cog"></i>
+                <span>ECIF码维护管理</span>
+                <i class="fa fa-caret-down ml-auto"></i>
+            </div>
+            <div class="pl-4">
+                <div class="sidebar-item text-sm">外部系统客户关系维护</div>
+                <div class="sidebar-item text-sm">机构客户G码维护</div>
+                <div class="sidebar-item text-sm">产品客户P码维护</div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="sidebar-item">
+                <i class="fa fa-list-alt"></i>
+                <span>个人客户管理</span>
+                <i class="fa fa-caret-down ml-auto"></i>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="sidebar-item">
+                <i class="fa fa-tasks"></i>
+                <span>待办事宜</span>
+                <i class="fa fa-caret-down ml-auto"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 overflow-auto p-4">
+        <!-- 面包屑 -->
+        <div class="text-sm text-gray-600 mb-4">
+            客户管理 / 公司所有客户
+        </div>
+
+        <!-- 查询表单 -->
+        <div class="bg-white rounded shadow p-4 mb-4">
+            <div class="grid grid-cols-6 gap-4">
+                <div class="col-span-2">
+                    <label class="text-sm text-gray-700">客户编码</label>
+                    <input type="text" placeholder="请输入客户编码" class="form-input w-full">
+                </div>
+                <div class="col-span-2">
+                    <label class="text-sm text-gray-700">客户名称</label>
+                    <input type="text" placeholder="请输入客户名称" class="form-input w-full">
+                </div>
+                <div class="col-span-2">
+                    <label class="text-sm text-gray-700">国家地区</label>
+                    <select class="form-select w-full">
+                        <option>请选择国家地区</option>
+                        <option>中国</option>
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <label class="text-sm text-gray-700">省份</label>
+                    <select class="form-select w-full">
+                        <option>请选择省份</option>
+                        <option>上海市</option>
+                        <option>北京市</option>
+                    </select>
+                </div>
+                <div class="col-span-2">
+                    <label class="text-sm text-gray-700">注册资本</label>
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="最小值" class="form-input flex-1">
+                        <span>至</span>
+                        <input type="text" placeholder="最大值" class="form-input flex-1">
+                    </div>
+                </div>
+                <div class="col-span-2 flex items-end justify-end gap-2">
+                    <button class="btn-primary">
+                        <i class="fa fa-search mr-1"></i>查询
+                    </button>
+                    <button class="btn-default">
+                        <i class="fa fa-refresh mr-1"></i>重置
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 客户列表 -->
+        <div class="bg-white rounded shadow p-4">
+            <div class="space-y-4">
+                <!-- 客户1 -->
+                <div class="border-b border-gray-200 pb-3">
+                    <div class="font-medium text-primary">嘉实中证500交易型开放式指数证券投资基金联接基金<span class="text-sm text-gray-500">P00000000007</span></div>
+                    <div class="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
+                        <div>
+                            <div>产品简称：嘉实中证500联接基金</div>
+                            <div>备案时间：2025-01-01</div>
+                            <div>备案机构：中国证券投资基金业协会</div>
+                            <div>备案码：123456</div>
+                        </div>
+                        <div>
+                            <div>管理机构：嘉实基金管理有限公司</div>
+                            <div>管理机构G码：嘉实基金管理有限公司</div>
+                            <div>托管机构：中国建设银行股份有限公司</div>
+                            <div>托管机构G码：嘉实基金管理有限公司</div>
+                        </div>
+                        <div>
+                            <div>产品状态：运作中</div>
+                            <div>产品成立日期：2025-01-10</div>
+                            <div>产品结束日期：--</div>
+                            <div>产品规模：1000.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户2 -->
+                <div class="border-b border-gray-200 pb-3">
+                    <div class="font-medium text-primary">华夏基金管理有限公司 <span class="text-sm text-gray-500">G00000000002</span></div>
+                    <div class="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
+                        <div>
+                            <div>注册国家地区：中国</div>
+                            <div>注册资本(元)：238,000,000.00</div>
+                            <div>统一社会信用代码：91110000363940653</div>
+                        </div>
+                        <div>
+                            <div>省份：北京市</div>
+                            <div>所属行业：--</div>
+                            <div>全球法人机构识别编码：3003004EF16H3EQG2C52</div>
+                        </div>
+                        <div>
+                            <div>企业性质：有限责任公司 (外商投资、非独资)</div>
+                            <div>行业分类：金融业-资本市场服务...</div>
+                            <div>公司注册证明书：--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户3 -->
+                <div class="border-b border-gray-200 pb-3">
+                    <div class="font-medium text-primary">工银瑞信基金管理有限公司 <span class="text-sm text-gray-500">G00000000004</span></div>
+                    <div class="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
+                        <div>
+                            <div>注册国家地区：中国</div>
+                            <div>注册资本(元)：200,000,000.00</div>
+                            <div>统一社会信用代码：91110000717856308U</div>
+                        </div>
+                        <div>
+                            <div>省份：北京市</div>
+                            <div>所属行业：--</div>
+                            <div>全球法人机构识别编码：300300B82Y2ZXKTSAZ89</div>
+                        </div>
+                        <div>
+                            <div>企业性质：有限责任公司 (外商投资、非独资)</div>
+                            <div>行业分类：金融业-资本市场服务...</div>
+                            <div>公司注册证明书：--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户4 -->
+                <div class="border-b border-gray-200 pb-3">
+                    <div class="font-medium text-primary">诺安基金管理有限公司 <span class="text-sm text-gray-500">G00000000005</span></div>
+                    <div class="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
+                        <div>
+                            <div>注册国家地区：中国</div>
+                            <div>注册资本(元)：150,000,000.00</div>
+                            <div>统一社会信用代码：914403007576004033</div>
+                        </div>
+                        <div>
+                            <div>省份：广东省</div>
+                            <div>所属行业：--</div>
+                            <div>全球法人机构识别编码：--</div>
+                        </div>
+                        <div>
+                            <div>企业性质：有限责任公司</div>
+                            <div>行业分类：金融业-资本市场服务...</div>
+                            <div>公司注册证明书：--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客户5 -->
+                <div class="pb-3">
+                    <div class="font-medium text-primary">中邮创业基金管理股份有限公司 <span class="text-sm text-gray-500">G00000000006</span></div>
+                    <div class="grid grid-cols-3 gap-4 text-sm text-gray-600 mt-2">
+                        <div>
+                            <div>注册国家地区：中国</div>
+                        </div>
+                        <div>
+                            <div>省份：北京市</div>
+                        </div>
+                        <div>
+                            <div>企业性质：股份有限公司 (非上市、外商投资企业投资)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="flex justify-between items-center mt-4 text-sm">
+                <div>共761228条</div>
+                <div class="flex items-center gap-2">
+                    <span>20条/页</span>
+                    <button class="btn-default px-2 py-0.5"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn-primary px-2 py-0.5">1</button>
+                    <button class="btn-default px-2 py-0.5">2</button>
+                    <button class="btn-default px-2 py-0.5">3</button>
+                    <button class="btn-default px-2 py-0.5">4</button>
+                    <button class="btn-default px-2 py-0.5">5</button>
+                    <button class="btn-default px-2 py-0.5">6</button>
+                    <span>...</span>
+                    <button class="btn-default px-2 py-0.5">38062</button>
+                    <button class="btn-default px-2 py-0.5"><i class="fa fa-angle-right"></i></button>
+                    <span>前往</span>
+                    <input type="text" value="1" class="form-input w-8 text-center">
+                    <span>页</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
