@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分公司新开客户奖励报表</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .highlight-red { background-color: #fca5a5; color: #dc2626; font-weight: bold; }
+        .highlight-green { background-color: #d1fae5; color: #10b981; font-weight: bold; }
+        .highlight-yellow { background-color: #fef3c7; color: #d97706; font-weight: bold; }
+        .table-header {
+            background-color: #dc2626;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        .table-body {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .table-body td,
+        .table-body th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .group-title {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            padding: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .remark-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+<!-- 顶部横幅 -->
+<div class="bg-red-700 text-white p-4 text-center text-xl font-bold shadow-lg">
+    分公司【一阶段】2025.12.30<br>
+    <span class="text-lg">新开客户数奖励 + 基础奖奖励</span>
+</div>
+
+<!-- 主内容区 -->
+<div class="max-w-7xl mx-auto p-6 overflow-x-auto">
+
+    <!-- 表格容器 -->
+    <div class="overflow-x-auto">
+        <table class="table-body w-full">
+            <thead>
+            <tr class="table-header">
+                <th>分组</th>
+                <th>排名</th>
+                <th>分公司</th>
+                <th>当日新开客户数</th>
+                <th>活动期间新开客户数!</th>
+                <th>活动期间新开有效户数</th>
+                <th>活动期间新开户企微有效认证率</th>
+                <th>新开有效户目标完成率</th>
+                <th>剩余自然日</th>
+                <th>新开有效户目标缺口(60%)</th>
+                <th>分公司完成目标每日需新开有效户</th>
+                <th>每家营业部每日需新开有效户数</th>
+                <th>获客数量卓越奖(万)</th>
+                <th>获客基础奖(万)</th>
+                <th>活动备注</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <!-- A1 组 -->
+            <tr class="group-title">
+                <td colspan="15" class="bg-gray-100 font-semibold">A1</td>
+            </tr>
+
+            <!-- 数据行 -->
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>上海分公司</td>
+                <td>146</td>
+                <td class="highlight-red">4300</td>
+                <td>1422</td>
+                <td class="highlight-green">34.78%</td>
+                <td class="highlight-green">218.75%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">6.5</td>
+                <td>12.04</td>
+                <td rowspan="12" class="remark-box">
+                    ① 第一阶段，完成【新开有效客户目标】60%的分公司可获得基础奖奖励，将减免线下新增客户的相关成本
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>北京东城分公司</td>
+                <td>111</td>
+                <td class="highlight-red">3417</td>
+                <td>1466</td>
+                <td class="highlight-green">24.29%</td>
+                <td class="highlight-green">239.15%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">5</td>
+                <td>9.57</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>广东分公司</td>
+                <td>129</td>
+                <td class="highlight-red">3335</td>
+                <td>1682</td>
+                <td class="highlight-green">42.19%</td>
+                <td class="highlight-green">160.37%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">3.5</td>
+                <td>9.34</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>北京朝阳分公司</td>
+                <td>102</td>
+                <td class="highlight-red">3243</td>
+                <td>1166</td>
+                <td class="highlight-green">22.54%</td>
+                <td class="highlight-green">162.59%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">2</td>
+                <td>9.08</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>5</td>
+                <td>江苏分公司</td>
+                <td>136</td>
+                <td class="highlight-red">3020</td>
+                <td>1236</td>
+                <td class="highlight-green">32.38%</td>
+                <td class="highlight-green">184.54%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">7.5</td>
+                <td>8.46</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>6</td>
+                <td>北京海淀分公司</td>
+                <td>135</td>
+                <td class="highlight-red">2785</td>
+                <td>693</td>
+                <td class="highlight-green">17.93%</td>
+                <td class="highlight-green">122.24%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">6</td>
+                <td>7.80</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>7</td>
+                <td>北京京西分公司</td>
+                <td>122</td>
+                <td class="highlight-red">2372</td>
+                <td>726</td>
+                <td class="highlight-green">22.85%</td>
+                <td class="highlight-green">148.77%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">4.5</td>
+                <td>6.64</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>8</td>
+                <td>福建分公司</td>
+                <td>107</td>
+                <td class="highlight-red">2233</td>
+                <td>1140</td>
+                <td class="highlight-green">40.85%</td>
+                <td class="highlight-green">164.47%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">6.25</td>
+                <td>6.14</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>9</td>
+                <td>浙江分公司</td>
+                <td>69</td>
+                <td class="highlight-red">2192</td>
+                <td>850</td>
+                <td class="highlight-green">33.58%</td>
+                <td class="highlight-green">180.47%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">6.14</td>
+                <td>6.01</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>10</td>
+                <td>山东分公司</td>
+                <td>107</td>
+                <td class="highlight-red">2146</td>
+                <td>975</td>
+                <td class="highlight-green">30.51%</td>
+                <td class="highlight-green">163.64%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">4.94</td>
+                <td>6.01</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>11</td>
+                <td>深圳分公司</td>
+                <td>51</td>
+                <td class="highlight-red">1764</td>
+                <td>549</td>
+                <td class="highlight-green">26.82%</td>
+                <td class="highlight-green">155.00%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">4.94</td>
+                <td>4.94</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>12</td>
+                <td>北京京南分公司</td>
+                <td>67</td>
+                <td class="highlight-red">1074</td>
+                <td>576</td>
+                <td class="highlight-green">46.30%</td>
+                <td class="highlight-green">116.38%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">3.01</td>
+                <td>3.01</td>
+            </tr>
+
+            <!-- A2 组 -->
+            <tr class="group-title">
+                <td colspan="15" class="bg-gray-100 font-semibold">A2</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>西北分公司</td>
+                <td>211</td>
+                <td class="highlight-red">5024</td>
+                <td>1340</td>
+                <td class="highlight-green">42.02%</td>
+                <td class="highlight-green">157.10%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">7.5</td>
+                <td>14.07</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>江西分公司</td>
+                <td>125</td>
+                <td class="highlight-red">4106</td>
+                <td>895</td>
+                <td class="highlight-green">22.41%</td>
+                <td class="highlight-green">109.83%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">6</td>
+                <td>11.50</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>重庆分公司</td>
+                <td>89</td>
+                <td class="highlight-red">3822</td>
+                <td>1034</td>
+                <td class="highlight-green">41.82%</td>
+                <td class="highlight-green">121.12%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">4.5</td>
+                <td>10.70</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>四川分公司</td>
+                <td>88</td>
+                <td class="highlight-red">3188</td>
+                <td>867</td>
+                <td class="highlight-green">39.77%</td>
+                <td class="highlight-green">194.39%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">8.93</td>
+                <td>8.93</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>5</td>
+                <td>河北分公司</td>
+                <td>122</td>
+                <td class="highlight-red">2951</td>
+                <td>1267</td>
+                <td class="highlight-green">32.76%</td>
+                <td class="highlight-green">215.54%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">8.26</td>
+                <td>8.26</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>6</td>
+                <td>湖北分公司</td>
+                <td>578</td>
+                <td class="highlight-red">2902</td>
+                <td>1156</td>
+                <td class="highlight-green">44.01%</td>
+                <td class="highlight-green">227.01%</td>
+                <td>-67</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">已完成</td>
+                <td class="highlight-red">8.13</td>
+                <td>8.13</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
